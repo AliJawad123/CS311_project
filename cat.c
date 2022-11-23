@@ -19,7 +19,8 @@ n_printer(int fd)
       {
       //printf("-");
         counter+=1;
-     
+        
+        if(i<n-1)
         printf("%d ",counter);
         
         
@@ -59,7 +60,7 @@ main(int argc, char *argv[])
   if(argc>1)
 	{
 	if(!strcmp(argv[1], "-n"))
-	{printf("n available\n");
+	{
 	checker++;}
 	}
 
