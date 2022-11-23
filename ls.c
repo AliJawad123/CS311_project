@@ -27,7 +27,7 @@ fmtname(char *path)
 void
 ls(char *path,int checker)
 {
-printf("path = %s\n",path);
+//printf("path = %s\n",path);
   char buf[512], *p;
   int fd;
   struct dirent de;
@@ -48,12 +48,12 @@ printf("path = %s\n",path);
   case T_DEVICE:
   // displays the content of file
   case T_FILE:
-    printf("!!! %s %d %d %l\n", fmtname(path), st.type, st.ino, st.size);
+    printf("%s %d %d %l\n", fmtname(path), st.type, st.ino, st.size);
     break;
 
   case T_DIR:
     if(strlen(path) + 1 + DIRSIZ + 1 > sizeof buf){
-      printf("@@@ ls: path too long\n");
+      printf("ls: path too long\n");
       break;
     }
     strcpy(buf, path);
@@ -70,9 +70,9 @@ printf("path = %s\n",path);
       }  
                                // name, info regarding file,id, size
       if(checker==0)
-      printf("$$$ %s %d %d %d\n", fmtname(buf), st.type, st.ino, st.size);
+      printf("%s %d %d %d\n", fmtname(buf), st.type, st.ino, st.size);
    
-    if(checker==1)
+    if(checker==1) // code for adding line number.
     printf("%d %s %d %d %d\n",counter++, fmtname(buf), st.type, st.ino, st.size);
     
     }
@@ -86,13 +86,13 @@ main(int argc, char *argv[])
 {
 
  int i;
-printf("Hello jawad%%% Ali\n");
+
 
 int checker=0;
 if(argc>1)
 {
 if(!strcmp(argv[1], "-n"))
-{printf("n available\n");
+{
 checker=1;}
 } 
   if(argc < 2){
@@ -103,20 +103,22 @@ checker=1;}
   
     if(argc < 3 && (!strcmp(argv[1], "-n"))){
     ls(".",checker);
-    printf("-n ran \n");
     exit(0);
   }
   
-  
+  if(checker!=1)
   for(i=1; i<argc; i++)
   {
-  /*
-  if(!strcmp(argv[1], "-n") && (argc<3))
-  {ls(".",checker);
-  continue;}
-  */
+ 
     ls(argv[i],checker);
     }
+    else
+    {
+    for(i=2; i<argc; i++)
+  {
+ 
+    ls(argv[i],checker);
+    }}
   exit(0);
 }
 
