@@ -101,9 +101,9 @@ extern uint64 sys_unlink(void);
 extern uint64 sys_link(void);
 extern uint64 sys_mkdir(void);
 extern uint64 sys_close(void);
+extern uint64 sys_hello(void);
 
-//this is the proto type of new function or system call
-extern uint64 sys_getyear(void);
+
 
 // An array mapping syscall numbers from syscall.h
 // to the function that handles the system call.
@@ -129,9 +129,9 @@ static uint64 (*syscalls[])(void) = {
 [SYS_link]    sys_link,
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
+[SYS_hello]   sys_hello,
 
-//This is newly added system call.
-[SYS_getyear] sys_getyear,   //  This system_call no.22: "sys_getyear" is the pointer to the funtion that i am writing now.
+
 };
 
 void
